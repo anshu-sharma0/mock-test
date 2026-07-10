@@ -44,6 +44,9 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 type Tone = "primary" | "success" | "warning" | "ai" | "error";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "ai";
+type ButtonSize = "default" | "compact";
+type CardPadding = "none" | "default" | "large";
 
 type NavItem = {
   label: string;
@@ -221,11 +224,78 @@ const activity = [
   "Moved Algebra speed from weak to improving",
 ];
 
-function IconWrap({ icon: Icon, tone = "primary" }: { icon: LucideIcon; tone?: Tone }) {
+/** Enhanced IconWrap with gradient-tinted backgrounds */
+function IconWrap({
+  icon: Icon,
+  tone = "primary",
+  size: iconSize = "default",
+}: {
+  icon: LucideIcon;
+  tone?: Tone;
+  size?: "small" | "default" | "large";
+}) {
+  const dim = iconSize === "small" ? 36 : iconSize === "large" ? 56 : 44;
+  const px = iconSize === "small" ? 18 : iconSize === "large" ? 26 : 20;
   return (
-    <span className={`feature-icon ${tone}`}>
-      <Icon size={20} strokeWidth={2.2} />
+    <span className={`feature-icon ${tone}`} style={{ width: dim, height: dim }}>
+      <Icon size={px} strokeWidth={2.2} />
     </span>
+  );
+}
+
+/** GradientBadge — pill tag with gradient tint and solid gradient text */
+function GradientBadge({
+  label,
+  tone = "primary",
+  icon: Icon,
+}: {
+  label: string;
+  tone?: Tone;
+  icon?: LucideIcon;
+}) {
+  return (
+    <span className={`status ${tone}`}>
+      {Icon ? <Icon size={11} strokeWidth={2.5} /> : null}
+      {label}
+    </span>
+  );
+}
+
+/** GlassCard — glassmorphism surface with optional hover physics */
+function GlassCard({
+  children,
+  hoverable = false,
+  padding = "default",
+  className = "",
+}: {
+  children: React.ReactNode;
+  hoverable?: boolean;
+  padding?: CardPadding;
+  className?: string;
+}) {
+  const padClass = padding === "none" ? "" : padding === "large" ? "" : "pad";
+  const padStyle = padding === "large" ? { padding: 32 } : undefined;
+  return (
+    <div
+      className={`card ${padClass} ${hoverable ? "hover" : ""} ${className}`}
+      style={padStyle}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** MetricWidget — metric card with gradient text value */
+function MetricWidget({ metric }: { metric: Metric }) {
+  const tone = metric.tone ?? "primary";
+  return (
+    <GlassCard className="metric">
+      <div className="stack">
+        <GradientBadge label={metric.trend} tone={tone} />
+        <span className={`metric-value ${tone}`}>{metric.value}</span>
+        <span className="metric-label">{metric.label}</span>
+      </div>
+    </GlassCard>
   );
 }
 
@@ -240,6 +310,34 @@ function Logo({ href = "/" }: { href?: string }) {
   );
 }
 
+/** GradientButton — premium button with variant support */
+function GradientButton({
+  href,
+  children,
+  variant = "primary",
+  size = "default",
+  icon: Icon,
+  onClick,
+}: {
+  href?: string;
+  children?: React.ReactNode;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  icon?: LucideIcon;
+  onClick?: () => void;
+}) {
+  const cls = `btn ${variant} ${size === "compact" ? "compact" : ""}`;
+  const inner = (
+    <>
+      {Icon ? <Icon size={16} strokeWidth={2.2} /> : null}
+      {children}
+    </>
+  );
+  if (href) return <Link className={cls} href={href}>{inner}</Link>;
+  return <button className={cls} onClick={onClick}>{inner}</button>;
+}
+
+/** Legacy ButtonLink alias — keeps all existing call sites working */
 function ButtonLink({
   href,
   children,
@@ -248,7 +346,7 @@ function ButtonLink({
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "danger";
+  variant?: ButtonVariant;
   compact?: boolean;
 }) {
   return (
@@ -353,6 +451,7 @@ function SectionHead({
   );
 }
 
+/** Card — backward-compat alias for GlassCard */
 function Card({
   children,
   hover = false,
@@ -362,19 +461,16 @@ function Card({
   hover?: boolean;
   className?: string;
 }) {
-  return <div className={`card pad ${hover ? "hover" : ""} ${className}`}>{children}</div>;
+  return (
+    <GlassCard hoverable={hover} className={className}>
+      {children}
+    </GlassCard>
+  );
 }
 
+/** MetricCard — backward-compat alias for MetricWidget */
 function MetricCard({ metric }: { metric: Metric }) {
-  return (
-    <Card className="metric">
-      <div className="stack">
-        <span className={`status ${metric.tone ?? "primary"}`}>{metric.trend}</span>
-        <span className="metric-value">{metric.value}</span>
-        <span className="metric-label">{metric.label}</span>
-      </div>
-    </Card>
-  );
+  return <MetricWidget metric={metric} />;
 }
 
 function HeroPreview() {
@@ -1005,21 +1101,20 @@ function StudentDashboard() {
   return (
     <AppFrame title="Today" subtitle="Your next best action is ready" nav={studentNav} active="/app">
       <div className="workspace">
-        <div className="grid two">
-          <Card className="span-two">
-            <div className="row between wrap">
-              <div className="stack">
-                <span className="eyebrow ai"><Flame size={16} /> 12 day streak</span>
-                <h2 className="h2">Continue Rank Sprint before your evening review block.</h2>
-                <p className="lead">
-                  You have 38 minutes left in the current attempt. Autosave is healthy.
-                </p>
-              </div>
-              <ButtonLink href="/app/attempts/live-jee-main">
-                Resume test <Play size={18} />
-              </ButtonLink>
+        {/* Full-bleed gradient continue-test banner */}
+        <div className="gradient-banner span-two">
+          <div className="row between wrap">
+            <div className="stack">
+              <span className="eyebrow ai"><Flame size={16} /> 12 day streak</span>
+              <h2 className="h2">Continue Rank Sprint before your evening review block.</h2>
+              <p className="lead">
+                You have 38 minutes left in the current attempt. Autosave is healthy.
+              </p>
             </div>
-          </Card>
+            <ButtonLink href="/app/attempts/live-jee-main" variant="secondary">
+              Resume test <Play size={18} />
+            </ButtonLink>
+          </div>
         </div>
         <div className="grid four">
           {dashboardMetrics.map((metric) => (
@@ -1081,8 +1176,10 @@ function TestTable() {
                 <br />
                 <span className="muted">{test.meta}</span>
               </td>
-              <td><span className={`status ${test.tone}`}>{test.status}</span></td>
-              <td>{test.price}</td>
+              <td>
+                <GradientBadge label={test.status} tone={test.tone} />
+              </td>
+              <td><span className="muted">{test.price}</span></td>
               <td>
                 <ButtonLink href={`/app/tests/${test.slug}`} variant="secondary" compact>
                   Open
@@ -1114,20 +1211,25 @@ function ActivityTimeline() {
 
 function LeaderboardSnippet() {
   return (
-    <Card>
+    <GlassCard hoverable>
       <div className="stack">
         <div className="row between">
           <h3 className="h3">Leaderboard</h3>
-          <span className="status primary">Top 9%</span>
+          <GradientBadge label="Top 9%" tone="success" icon={Trophy} />
         </div>
         {["Aarav", "You", "Mira", "Kabir"].map((name, index) => (
-          <div className="row between" key={name}>
-            <span>{index + 4}. {name}</span>
-            <strong className="strong">{[812, 804, 798, 792][index]}</strong>
+          <div className="row between" key={name} style={name === "You" ? { fontWeight: 800, color: "var(--heading)" } : {}}>
+            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              {name === "You" ? <Star size={14} fill="var(--warning)" color="var(--warning)" /> : null}
+              {index + 4}. {name}
+            </span>
+            <strong className="strong" style={name === "You" ? { background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } : {}}>
+              {[812, 804, 798, 792][index]}
+            </strong>
           </div>
         ))}
       </div>
-    </Card>
+    </GlassCard>
   );
 }
 
@@ -1264,19 +1366,19 @@ function AttemptPage() {
           <div className="row wrap">
             <span className="chip"><Clock size={16} /> 01:22:18</span>
             <span className="chip">Question 18 of 90</span>
-            <span className="status success">Autosaved</span>
+            <GradientBadge label="Autosaved" tone="success" icon={CheckCircle2} />
           </div>
         </div>
       </header>
       <main className="container test-layout">
-        <section className="question-card">
+        <section className="question-card" style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(16px)", border: "1px solid rgba(226,232,240,0.8)" }}>
           <div className="row between wrap">
-            <span className="status primary">Physics - Electrostatics</span>
+            <GradientBadge label="Physics - Electrostatics" tone="primary" />
             <span className="muted">Single correct answer</span>
           </div>
           <div style={{ margin: "18px 0" }}>
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: "42%" }} />
+              <div className="progress-fill" style={{ width: "42%", background: "var(--gradient-primary)" }} />
             </div>
           </div>
           <h1 className="h2">
