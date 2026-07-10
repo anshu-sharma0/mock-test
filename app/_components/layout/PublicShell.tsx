@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Logo } from "../ui/Logo";
 import { ButtonLink } from "../ui/GradientButton";
+import { ThemeToggle } from "../ui/ThemeToggle";
 import { publicNav } from "../../_lib/navigation";
 
 function PublicNav() {
@@ -17,6 +18,7 @@ function PublicNav() {
           ))}
         </nav>
         <div className="row nav-actions">
+          <ThemeToggle />
           <ButtonLink href="/auth/login" variant="ghost" compact>
             Login
           </ButtonLink>

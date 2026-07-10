@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Bell, Search, ShieldCheck } from "lucide-react";
 import { Logo } from "../ui/Logo";
 import { ButtonLink } from "../ui/GradientButton";
+import { ThemeToggle } from "../ui/ThemeToggle";
 import { studentNav } from "../../_lib/navigation";
 import type { NavItem } from "../../_lib/types";
 
@@ -53,6 +54,7 @@ export function AppFrame({
               <Search size={18} />
               Search tests, results, questions
             </Link>
+            <ThemeToggle />
             <ButtonLink href="/app/notifications" variant="secondary" compact>
               <Bell size={16} /> 4
             </ButtonLink>
