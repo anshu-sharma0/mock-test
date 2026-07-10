@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import {
   Activity,
   Award,
@@ -15,6 +17,7 @@ import {
   CreditCard,
   DollarSign,
   Eye,
+  EyeOff,
   FileText,
   Filter,
   Flame,
@@ -267,18 +270,20 @@ function GlassCard({
   hoverable = false,
   padding = "default",
   className = "",
+  style,
 }: {
   children: React.ReactNode;
   hoverable?: boolean;
   padding?: CardPadding;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const padClass = padding === "none" ? "" : padding === "large" ? "" : "pad";
   const padStyle = padding === "large" ? { padding: 32 } : undefined;
   return (
     <div
       className={`card ${padClass} ${hoverable ? "hover" : ""} ${className}`}
-      style={padStyle}
+      style={{ ...padStyle, ...style }}
     >
       {children}
     </div>
@@ -919,11 +924,16 @@ function PublicInfoPage({
 }
 
 function AuthPage({ mode }: { mode: string }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [role, setRole] = useState("Student");
+
+  const isSignup = mode === "signup";
   const title =
     mode === "login"
       ? "Welcome back"
-      : mode === "signup"
-        ? "Create your MockTestZone account"
+      : isSignup
+        ? "Create your account"
         : mode === "verify"
           ? "Verify your account"
           : mode === "forgot-password"
@@ -931,51 +941,163 @@ function AuthPage({ mode }: { mode: string }) {
             : "Reset your password";
 
   return (
-    <PublicShell>
-      <section className="container section">
-        <div className="grid two">
-          <Card>
-            <form className="form-grid">
-              <span className="eyebrow ai">Secure access</span>
-              <h1 className="h2">{title}</h1>
-              <input className="input" placeholder="Email or phone" />
-              {mode !== "forgot-password" && mode !== "verify" ? (
-                <input className="input" placeholder="Password" type="password" />
-              ) : null}
-              {mode === "verify" ? <input className="input" placeholder="6 digit code" /> : null}
-              <ButtonLink href="/onboarding/student">
-                Continue <ChevronRight size={18} />
-              </ButtonLink>
-              <div className="row wrap">
-                <ButtonLink href="/auth/login" variant="secondary" compact>
-                  Login
-                </ButtonLink>
-                <ButtonLink href="/auth/signup" variant="ghost" compact>
-                  Create account
-                </ButtonLink>
-              </div>
-            </form>
-          </Card>
-          <Card>
-            <div className="stack">
-              <IconWrap icon={Lock} tone="success" />
-              <h2 className="h2">Role-aware routing</h2>
-              <p>
-                After auth, users land in the right workspace: student app, creator
-                dashboard, institute console, or platform admin.
-              </p>
-              <div className="grid two">
-                {["Student", "Creator", "Institute", "Admin"].map((role) => (
-                  <span className="chip" key={role}>
-                    {role}
-                  </span>
+    <div
+      className="page"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        padding: "24px",
+      }}
+    >
+      <GlassCard
+        hoverable
+        padding="large"
+        className="auth-card"
+        style={{ width: "100%", maxWidth: 440 }}
+      >
+        <div className="stack" style={{ gap: 24, textAlign: "center", alignItems: "center" }}>
+          <Logo />
+          <div>
+            <h1 className="h2" style={{ fontSize: 28 }}>
+              {title}
+            </h1>
+            <p className="muted" style={{ marginTop: 8, fontSize: 15 }}>
+              {isSignup
+                ? "Join MockTestZone to start your journey."
+                : "Enter your credentials to access your workspace."}
+            </p>
+          </div>
+        </div>
+
+        <form className="form-grid" style={{ marginTop: 32 }}>
+          {isSignup && (
+            <div className="stack" style={{ gap: 16 }}>
+              <div
+                className="row wrap"
+                style={{
+                  background: "var(--surface-hover)",
+                  padding: 6,
+                  borderRadius: 16,
+                  border: "1px solid var(--border)",
+                }}
+              >
+                {["Student", "Creator", "Institute"].map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => setRole(r)}
+                    style={{
+                      flex: 1,
+                      padding: "8px 12px",
+                      border: "none",
+                      background: role === r ? "#fff" : "transparent",
+                      borderRadius: 10,
+                      fontWeight: role === r ? 800 : 600,
+                      color: role === r ? "var(--primary)" : "var(--muted)",
+                      boxShadow: role === r ? "var(--shadow-sm)" : "none",
+                      cursor: "pointer",
+                      transition: "all 0.2s",
+                    }}
+                  >
+                    {r}
+                  </button>
                 ))}
               </div>
+              <input className="input" placeholder="Full Name" />
             </div>
-          </Card>
-        </div>
-      </section>
-    </PublicShell>
+          )}
+
+          <input className="input" placeholder="Email address" />
+
+          {mode !== "forgot-password" && mode !== "verify" ? (
+            <div style={{ position: "relative" }}>
+              <input
+                className="input"
+                placeholder="Password"
+                type={showPassword ? "text" : "password"}
+                style={{ paddingRight: 48 }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "var(--muted)",
+                  padding: 4,
+                  display: "flex",
+                }}
+                aria-label="Toggle password visibility"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+          ) : null}
+
+          {isSignup && (
+            <div style={{ position: "relative" }}>
+              <input
+                className="input"
+                placeholder="Confirm Password"
+                type={showConfirmPassword ? "text" : "password"}
+                style={{ paddingRight: 48 }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "var(--muted)",
+                  padding: 4,
+                  display: "flex",
+                }}
+                aria-label="Toggle confirm password visibility"
+              >
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+          )}
+
+          {mode === "verify" ? (
+            <input className="input" placeholder="6 digit verification code" />
+          ) : null}
+
+          <div style={{ marginTop: 12, display: "flex", flexDirection: "column" }}>
+            <GradientButton href="/onboarding/student" variant="primary">
+              {isSignup ? "Create account" : "Sign in to workspace"} <ChevronRight size={18} style={{ marginLeft: 6 }} />
+            </GradientButton>
+          </div>
+
+          <div
+            className="row wrap"
+            style={{ justifyContent: "center", marginTop: 20, fontSize: 14 }}
+          >
+            <span className="muted">
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
+            </span>
+            <Link
+              href={isSignup ? "/auth/login" : "/auth/signup"}
+              style={{ color: "var(--primary)", fontWeight: 800 }}
+            >
+              {isSignup ? "Log in instead" : "Create one now"}
+            </Link>
+          </div>
+        </form>
+      </GlassCard>
+    </div>
   );
 }
 

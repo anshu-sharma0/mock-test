@@ -1,4 +1,5 @@
-import { RouteRenderer, staticRoutes } from "../_components/mocktestzone";
+import { RouteRenderer } from "../_components/mocktestzone";
+import { staticRoutes } from "../_lib/routes";
 
 export function generateStaticParams() {
   return staticRoutes.map((route) => ({
