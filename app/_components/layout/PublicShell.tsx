@@ -1,35 +1,7 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { Logo } from "../ui/Logo";
-import { ButtonLink } from "../ui/GradientButton";
-import { ThemeToggle } from "../ui/ThemeToggle";
-import { publicNav } from "../../_lib/navigation";
+import { PublicNav } from "./PublicNav";
 
-function PublicNav() {
-  return (
-    <header className="public-nav">
-      <div className="container public-nav-inner">
-        <Logo />
-        <nav className="nav-links" aria-label="Main navigation">
-          {publicNav.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="row nav-actions">
-          <ThemeToggle />
-          <ButtonLink href="/auth/login" variant="ghost" compact>
-            Login
-          </ButtonLink>
-          <ButtonLink href="/auth/signup" compact>
-            Get Started <ChevronRight size={16} />
-          </ButtonLink>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 function Footer() {
   const groups = [

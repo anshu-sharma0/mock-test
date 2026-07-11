@@ -32,16 +32,18 @@ export function GradientButton({
 export function ButtonLink({
   href,
   children,
+  onClick,
   variant = "primary",
   compact = false,
 }: {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
   variant?: ButtonVariant;
   compact?: boolean;
 }) {
   return (
-    <Link className={`btn ${variant} ${compact ? "compact" : ""}`} href={href}>
+    <Link className={`btn ${variant} ${compact ? "compact" : ""}`} href={href} onClick={onClick}>
       {children}
     </Link>
   );
