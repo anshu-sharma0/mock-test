@@ -12,42 +12,59 @@ import { PricingPreview } from "./_components/sections/PricingPreview";
 
 function HeroPreview() {
   return (
-    <div className="hero-preview" aria-label="MockTestZone dashboard preview">
-      <div className="hero-preview-inner">
-        <div className="preview-top">
-          <div className="mini-stat">
-            <strong>74%</strong>
-            <span>Avg score</span>
+    <div className="relative w-full max-w-2xl mx-auto mt-8 lg:mt-0">
+      {/* Background Glows */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-violet-500/20 rounded-full blur-[100px] pointer-events-none" />
+
+      <GlassCard className="relative z-10 border border-[var(--border)] bg-[var(--surface)]/80 backdrop-blur-2xl shadow-2xl p-6 lg:p-8 overflow-hidden rounded-[32px]">
+        {/* Subtle top highlight */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400/50 to-transparent" />
+
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="p-5 rounded-2xl bg-[var(--surface-hover)] border border-[var(--border)] shadow-sm">
+            <div className="text-3xl lg:text-4xl font-black bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent mb-1">74%</div>
+            <div className="text-[11px] font-bold text-[var(--secondary-soft)] uppercase tracking-widest">Avg Score</div>
           </div>
-          <div className="mini-stat">
-            <strong>Top 9%</strong>
-            <span>Rank trend</span>
+          <div className="p-5 rounded-2xl bg-[var(--surface-hover)] border border-[var(--border)] shadow-sm">
+            <div className="text-3xl lg:text-4xl font-black bg-gradient-to-br from-emerald-400 to-teal-500 bg-clip-text text-transparent mb-1">Top</div>
+            <div className="text-[11px] font-bold text-[var(--secondary-soft)] uppercase tracking-widest">Rank Trend</div>
           </div>
-          <div className="mini-stat">
-            <strong>12d</strong>
-            <span>Streak</span>
+          <div className="p-5 rounded-2xl bg-[var(--surface-hover)] border border-[var(--border)] shadow-sm">
+            <div className="text-3xl lg:text-4xl font-black bg-gradient-to-br from-orange-400 to-rose-500 bg-clip-text text-transparent mb-1">12<span className="text-xl">D</span></div>
+            <div className="text-[11px] font-bold text-[var(--secondary-soft)] uppercase tracking-widest">Streak</div>
           </div>
         </div>
-        <div className="mock-chart">
+
+        <div className="flex items-end gap-3 h-[160px] mb-8 p-5 rounded-2xl bg-[var(--surface-hover)] border border-[var(--border)] shadow-inner">
           {[42, 58, 52, 76, 68, 86, 74].map((height, index) => (
-            <span
-              className={`bar ${index === 4 ? "green" : index === 5 ? "purple" : ""}`}
-              key={height + index}
-              style={{ height: `${height}%` }}
-            />
+            <div key={index} className="flex-1 bg-[var(--surface)] rounded-t-lg relative overflow-hidden group">
+              <div
+                className={`absolute bottom-0 left-0 right-0 rounded-t-lg transition-all duration-1000 ${index === 4 ? 'bg-gradient-to-t from-emerald-500/40 to-emerald-400' :
+                  index === 5 ? 'bg-gradient-to-t from-violet-500/40 to-violet-400' :
+                    'bg-gradient-to-t from-blue-500/40 to-blue-400'
+                  }`}
+                style={{ height: `${height}%` }}
+              >
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </div>
           ))}
         </div>
-        <div className="ai-panel stack">
-          <div className="row">
-            <Sparkles size={18} color="var(--ai)" />
-            <strong className="strong">AI insight</strong>
+
+        <div className="p-6 rounded-2xl border border-violet-500/30 bg-violet-500/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-violet-500/10 blur-[50px] rounded-full pointer-events-none" />
+          <div className="flex items-center gap-3 mb-3 relative z-10">
+            <div className="w-8 h-8 rounded-xl bg-violet-500/20 text-violet-500 flex items-center justify-center shadow-inner">
+              <Sparkles size={16} />
+            </div>
+            <strong className="text-violet-500 dark:text-violet-400 font-bold tracking-widest uppercase text-xs">AI Insight</strong>
           </div>
-          <p style={{ margin: 0 }}>
-            Physics accuracy rose, but time per electrostatics question is still 34 seconds
-            above your target. Review 18 saved mistakes before the next full mock.
+          <p className="text-[15px] text-[var(--body)] leading-relaxed relative z-10">
+            Physics accuracy rose, but time per electrostatics question is still <span className="text-[var(--heading)] font-bold">34 seconds above your target</span>. Review 18 saved mistakes before the next full mock.
           </p>
         </div>
-      </div>
+      </GlassCard>
     </div>
   );
 }
@@ -79,17 +96,16 @@ export default function LandingPage() {
         </section>
 
         {/* 2. Social Proof */}
-        <section className="section compact" style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "rgba(255, 255, 255, 0.02)" }}>
-          <div className="container">
-            <div className="row wrap between" style={{ opacity: 0.8, gap: "24px", justifyContent: "center" }}>
-              <span className="eyebrow" style={{ border: "none", boxShadow: "none", background: "transparent", fontSize: "16px", fontFamily: "var(--font-utility)" }}>
-                TRUSTED BY
-              </span>
-              <div className="row wrap" style={{ gap: "32px", fontFamily: "var(--font-utility)", color: "var(--heading)", fontSize: "15px" }}>
-                <span>1.2M+ ATTEMPTS MODELED</span>
-                <span>•</span>
+        <section className="py-12 border-y border-[var(--border)] relative overflow-hidden bg-gradient-to-r from-transparent via-[var(--surface-hover)] to-transparent">
+          <div className="absolute inset-0 bg-[var(--primary)]/5 blur-3xl pointer-events-none" />
+          <div className="container relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 lg:gap-12 opacity-80">
+              <span className="text-sm font-bold text-[var(--secondary-soft)] uppercase tracking-widest font-utility">Trusted By</span>
+              <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-12 font-utility text-[var(--heading)] font-bold text-sm lg:text-base">
+                <span>1.2M+ ATTEMPTS</span>
+                <span className="text-[var(--border)] hidden md:block">|</span>
                 <span>840+ COACHING TEAMS</span>
-                <span>•</span>
+                <span className="text-[var(--border)] hidden md:block">|</span>
                 <span>3.6K+ CREATORS</span>
               </div>
             </div>
@@ -97,35 +113,41 @@ export default function LandingPage() {
         </section>
 
         {/* 3. The Core Workflow (The Sequence) */}
-        <section className="section lg">
-          <div className="container">
+        <section className="section lg relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[var(--primary)]/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="container relative z-10">
             <SectionHead
               eyebrow="The Methodology"
               title="A chronological journey of improvement."
               copy="Stop guessing what to study. Our platform tightens the loop from attempt to mastery using a structured, AI-driven process."
             />
-            <div className="grid three">
-              <Card hover className="pad">
-                <div className="stack" style={{ gap: 16 }}>
-                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--primary)", fontWeight: 800, lineHeight: 1 }}>01</span>
-                  <h3 className="h3">Attempt</h3>
-                  <p style={{ margin: 0 }}>Take adaptive tests or timed practice drills that perfectly simulate real exam pressure and environment.</p>
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mt-12">
+              <GlassCard hoverable padding="large" className="relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[40px] group-hover:bg-blue-500/20 transition-colors pointer-events-none" />
+                <div className="stack gap-4 relative z-10">
+                  <span className="font-utility text-5xl font-black text-blue-500/20 group-hover:text-blue-500 transition-colors">01</span>
+                  <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Attempt</h3>
+                  <p className="text-[var(--body)] leading-relaxed m-0">Take adaptive tests or timed practice drills that perfectly simulate real exam pressure and environment.</p>
                 </div>
-              </Card>
-              <Card hover className="pad">
-                <div className="stack" style={{ gap: 16 }}>
-                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--ai)", fontWeight: 800, lineHeight: 1 }}>02</span>
-                  <h3 className="h3">Review</h3>
-                  <p style={{ margin: 0 }}>AI analyzes your speed, accuracy, and identifies weak chapters instantly, turning data into clear insights.</p>
+              </GlassCard>
+
+              <GlassCard hoverable padding="large" className="relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 rounded-full blur-[40px] group-hover:bg-violet-500/20 transition-colors pointer-events-none" />
+                <div className="stack gap-4 relative z-10">
+                  <span className="font-utility text-5xl font-black text-violet-500/20 group-hover:text-violet-500 transition-colors">02</span>
+                  <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Review</h3>
+                  <p className="text-[var(--body)] leading-relaxed m-0">AI analyzes your speed, accuracy, and identifies weak chapters instantly, turning data into clear insights.</p>
                 </div>
-              </Card>
-              <Card hover className="pad">
-                <div className="stack" style={{ gap: 16 }}>
-                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--success)", fontWeight: 800, lineHeight: 1 }}>03</span>
-                  <h3 className="h3">Plan</h3>
-                  <p style={{ margin: 0 }}>A daily study planner is automatically generated based on the specific gaps and mistakes in your results.</p>
+              </GlassCard>
+
+              <GlassCard hoverable padding="large" className="relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-[40px] group-hover:bg-emerald-500/20 transition-colors pointer-events-none" />
+                <div className="stack gap-4 relative z-10">
+                  <span className="font-utility text-5xl font-black text-emerald-500/20 group-hover:text-emerald-500 transition-colors">03</span>
+                  <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Plan</h3>
+                  <p className="text-[var(--body)] leading-relaxed m-0">A daily study planner is automatically generated based on the specific gaps and mistakes in your results.</p>
                 </div>
-              </Card>
+              </GlassCard>
             </div>
           </div>
         </section>

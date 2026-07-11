@@ -26,11 +26,10 @@ export default function AuthPage({ params }: { params: Promise<{ mode: string }>
             : "Reset your password";
 
   return (
-    <div className="page flex items-center justify-center min-h-screen p-6">
+    <div className="page flex items-center justify-center min-h-screen p-4">
       <GlassCard
-        hoverable
         padding="large"
-        className="auth-card w-full max-w-[440px]"
+        className="w-full max-w-[440px]"
       >
         <div className="flex flex-col items-center gap-6 text-center">
           <Logo />
@@ -55,11 +54,10 @@ export default function AuthPage({ params }: { params: Promise<{ mode: string }>
                     key={r}
                     type="button"
                     onClick={() => setRole(r)}
-                    className={`flex-1 py-2 px-3 border-none rounded-[10px] cursor-pointer transition-all duration-200 ${
-                      role === r
-                        ? "bg-white font-extrabold text-primary shadow-sm"
-                        : "bg-transparent font-semibold text-muted shadow-none"
-                    }`}
+                    className={`flex-1 py-2 px-3 border-none rounded-[10px] cursor-pointer transition-all duration-200 ${role === r
+                      ? "bg-white font-extrabold text-primary shadow-sm"
+                      : "bg-transparent font-semibold text-muted shadow-none"
+                      }`}
                   >
                     {r}
                   </button>
@@ -117,18 +115,18 @@ export default function AuthPage({ params }: { params: Promise<{ mode: string }>
             </GradientButton>
           </div>
 
-          <div className="flex flex-wrap justify-center mt-5 text-sm">
+          <div className="flex flex-wrap justify-center mt-4 text-sm">
             <span className="muted">
               {isSignup ? "Already have an account?" : "Don't have an account?"}
             </span>
             <Link
               href={isSignup ? "/auth/login" : "/auth/signup"}
-              className="text-primary font-extrabold ml-1.5"
+              className="text-primary! font-extrabold ml-1.5"
             >
               {isSignup ? "Log in instead" : "Create one now"}
             </Link>
           </div>
-          <Link href="/" className="text text-primary flex justify-center items-center">
+          <Link href="/" className="text text-primary! flex justify-center items-center">
             Back to Home
           </Link>
         </form>

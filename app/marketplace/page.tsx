@@ -19,7 +19,7 @@ export default function MarketplacePage() {
     <PublicShell>
       <main>
         {/* 1. Search-Centric Hero */}
-        <section className="section hero" style={{ textAlign: "center" }}>
+        <section className="section" style={{ textAlign: "center" }}>
           <div className="container stack" style={{ alignItems: "center", gap: 32 }}>
             <h1 className="h1">Find the perfect mock test.</h1>
 
@@ -91,12 +91,12 @@ export default function MarketplacePage() {
           </div>
         </section> */}
 
-        <section className="section lg">
+        <section className="section lg pt-0!">
           <div className="container">
             <div className="row between" style={{ marginBottom: 24, paddingBottom: 16, borderBottom: "1px solid var(--border)" }}>
               <h2 className="h2" style={{ fontSize: "28px" }}>All Mock Tests</h2>
               <div className="row" style={{ gap: 12 }}>
-                <span className="muted" style={{ fontSize: "14px" }}>Sort by:</span>
+                <span className="muted text-nowrap" style={{ fontSize: "14px" }}>Sort by:</span>
                 <select className="select" style={{ background: "transparent", border: "none", color: "var(--heading)", fontWeight: "bold", outline: "none", cursor: "pointer" }}>
                   <option>Most Popular</option>
                   <option>Highest Rated</option>

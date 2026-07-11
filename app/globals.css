@@ -196,6 +196,7 @@ a {
   border-color: rgba(124, 58, 237, 0.18);
   background: var(--ai-light);
   color: var(--ai);
+  width: max-content;
 }
 
 .h1,
