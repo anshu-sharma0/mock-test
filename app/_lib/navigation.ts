@@ -28,10 +28,10 @@ import type { NavItem } from "./types";
 export const publicNav = [
   { label: "Product", href: "/" },
   { label: "Marketplace", href: "/marketplace" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Creators", href: "/creators" },
-  { label: "Institutes", href: "/institutes" },
-  { label: "Resources", href: "/resources" },
+  // { label: "Creators", href: "/creators" },
+  // { label: "Institutes", href: "/institutes" },
+  // { label: "Resources", href: "/resources" },
+  // { label: "Pricing", href: "/pricing" },
 ];
 
 export const studentNav: NavItem[] = [

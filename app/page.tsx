@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Brain, CalendarDays, ChevronRight, Clock, LineChart, Sparkles, Star, Target, Trophy } from "lucide-react";
+import { Brain, CalendarDays, ChevronRight, Clock, LineChart, Sparkles, Star, Target, Trophy, ArrowRight } from "lucide-react";
 import type { Tone } from "./_lib/types";
 import { marketplaceListings } from "./_lib/data";
 import { PublicShell } from "./_components/layout/PublicShell";
@@ -52,114 +52,158 @@ function HeroPreview() {
   );
 }
 
-
 export default function LandingPage() {
-  const features: { title: string; copy: string; icon: LucideIcon; tone: Tone }[] = [
-    { title: "Adaptive tests", copy: "Recommendations adjust after every attempt.", icon: Target, tone: "primary" },
-    { title: "AI analysis", copy: "Readable insights without noisy dashboards.", icon: Brain, tone: "ai" },
-    { title: "Performance tracking", copy: "Score, speed, accuracy, and weak chapters.", icon: LineChart, tone: "success" },
-    { title: "Timed practice", copy: "Focused drills that build exam-day speed.", icon: Clock, tone: "primary" },
-    { title: "Rank prediction", copy: "Readiness signals with confidence context.", icon: Trophy, tone: "warning" },
-    { title: "Study planner", copy: "Daily tasks tied to real result gaps.", icon: CalendarDays, tone: "ai" },
-  ];
-
   return (
     <PublicShell>
       <main>
-        <section className="container hero">
-          <div className="stack" style={{ gap: 22 }}>
+        {/* 1. The Hero Section */}
+        <section className="container hero section hero">
+          <div className="stack" style={{ gap: 24 }}>
             <span className="eyebrow ai">
-              <Sparkles size={16} /> AI-powered mock test platform
+              <Sparkles size={16} /> Precision Mock Tests
             </span>
-            <h1 className="h1">Prepare with the calm precision of a premium SaaS tool.</h1>
+            <h1 className="h1">Master your exams with AI precision.</h1>
             <p className="lead">
-              MockTestZone helps students attempt better tests, understand results faster,
-              and turn every weak chapter into a clear next action.
+              Go beyond simple scores. MockTestZone uses AI to analyze your weak chapters, speed, and accuracy to tell you exactly what to study next.
             </p>
-            <div className="hero-actions">
+            <div className="hero-actions" style={{ marginTop: 12 }}>
               <ButtonLink href="/auth/signup">
-                Start free <ChevronRight size={18} />
+                Start Free Practice <ChevronRight size={18} />
               </ButtonLink>
               <ButtonLink href="/marketplace" variant="secondary">
-                Browse marketplace
+                Explore Marketplace
               </ButtonLink>
-            </div>
-            <div className="trust-row">
-              <span className="trust-pill">1.2M+ attempts modeled</span>
-              <span className="trust-pill">For students, creators, institutes</span>
-              <span className="trust-pill">AA accessible flows</span>
             </div>
           </div>
           <HeroPreview />
         </section>
 
-        <section className="section compact">
-          <div className="container grid four">
-            {["Universities", "Coaching teams", "Creators", "Students"].map((item, index) => (
-              <Card key={item}>
-                <span className="metric-value">{["120+", "840+", "3.6k+", "1M+"][index]}</span>
-                <span className="metric-label">{item}</span>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section className="section">
+        {/* 2. Social Proof */}
+        <section className="section compact" style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "rgba(255, 255, 255, 0.02)" }}>
           <div className="container">
-            <SectionHead
-              eyebrow="Core product"
-              title="Everything points back to better attempts and clearer improvement."
-              copy="The platform keeps the learning loop tight: discover, attempt, review, plan, and improve."
-            />
-            <div className="grid three">
-              {features.map((feature) => (
-                <Card hover key={feature.title}>
-                  <div className="stack">
-                    <IconWrap icon={feature.icon} tone={feature.tone} />
-                    <h3 className="h3">{feature.title}</h3>
-                    <p>{feature.copy}</p>
-                  </div>
-                </Card>
-              ))}
+            <div className="row wrap between" style={{ opacity: 0.8, gap: "24px", justifyContent: "center" }}>
+              <span className="eyebrow" style={{ border: "none", boxShadow: "none", background: "transparent", fontSize: "16px", fontFamily: "var(--font-utility)" }}>
+                TRUSTED BY
+              </span>
+              <div className="row wrap" style={{ gap: "32px", fontFamily: "var(--font-utility)", color: "var(--heading)", fontSize: "15px" }}>
+                <span>1.2M+ ATTEMPTS MODELED</span>
+                <span>•</span>
+                <span>840+ COACHING TEAMS</span>
+                <span>•</span>
+                <span>3.6K+ CREATORS</span>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* 3. The Core Workflow (The Sequence) */}
+        <section className="section lg">
+          <div className="container">
+            <SectionHead
+              eyebrow="The Methodology"
+              title="A chronological journey of improvement."
+              copy="Stop guessing what to study. Our platform tightens the loop from attempt to mastery using a structured, AI-driven process."
+            />
+            <div className="grid three">
+              <Card hover className="pad">
+                <div className="stack" style={{ gap: 16 }}>
+                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--primary)", fontWeight: 800, lineHeight: 1 }}>01</span>
+                  <h3 className="h3">Attempt</h3>
+                  <p style={{ margin: 0 }}>Take adaptive tests or timed practice drills that perfectly simulate real exam pressure and environment.</p>
+                </div>
+              </Card>
+              <Card hover className="pad">
+                <div className="stack" style={{ gap: 16 }}>
+                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--ai)", fontWeight: 800, lineHeight: 1 }}>02</span>
+                  <h3 className="h3">Review</h3>
+                  <p style={{ margin: 0 }}>AI analyzes your speed, accuracy, and identifies weak chapters instantly, turning data into clear insights.</p>
+                </div>
+              </Card>
+              <Card hover className="pad">
+                <div className="stack" style={{ gap: 16 }}>
+                  <span style={{ fontFamily: "var(--font-utility)", fontSize: "48px", color: "var(--success)", fontWeight: 800, lineHeight: 1 }}>03</span>
+                  <h3 className="h3">Plan</h3>
+                  <p style={{ margin: 0 }}>A daily study planner is automatically generated based on the specific gaps and mistakes in your results.</p>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. The Signature AI Layer */}
         <section className="section">
           <div className="container">
-            <div className="card pad" style={{ background: "var(--ai-light)" }}>
-              <div className="grid two">
-                <div className="stack">
-                  <span className="eyebrow ai">Signature AI layer</span>
-                  <h2 className="h2">Insights that explain what to do next.</h2>
+            <div className="card pad" style={{ background: "var(--surface)", borderColor: "var(--ai)", borderWidth: "1px", borderStyle: "solid" }}>
+              <div className="grid two" style={{ alignItems: "center" }}>
+                <div className="stack" style={{ gap: 16 }}>
+                  <span className="eyebrow ai">Signature AI Layer</span>
+                  <h2 className="h2">Insights that actually explain what to do next.</h2>
                   <p className="lead">
-                    AI stays in service of the student journey: it summarizes mistakes,
-                    predicts readiness, and creates a study plan without taking over the page.
+                    Charts are nice, but action is better. Our AI summarizes your mistakes, predicts your readiness, and gives you a concrete study plan without overwhelming you with noise.
                   </p>
-                  <ButtonLink href="/app/analytics" variant="secondary">
-                    View analytics flow
-                  </ButtonLink>
+                  <div style={{ marginTop: 8 }}>
+                    <ButtonLink href="/app/analytics" variant="secondary">
+                      View analytics flow <ArrowRight size={16} />
+                    </ButtonLink>
+                  </div>
                 </div>
-                <div className="grid">
-                  <Card>
-                    <strong className="strong">Before</strong>
-                    <p>Score dropped from 76% to 69%. Student sees a chart but no priority.</p>
-                  </Card>
-                  <Card>
-                    <strong className="strong">After</strong>
-                    <p>
-                      AI finds slow algebra questions, adds two drills, and recommends a
-                      shorter retest.
+                <div className="grid" style={{ gap: 16 }}>
+                  <div className="mini-stat" style={{ opacity: 0.7 }}>
+                    <span className="eyebrow" style={{ marginBottom: 8 }}>Before</span>
+                    <strong className="strong" style={{ fontSize: "16px", fontFamily: "var(--font-body)" }}>Just a score and a confusing chart.</strong>
+                    <p style={{ margin: "4px 0 0", fontSize: "14px" }}>Score dropped from 76% to 69%. Student sees a chart but has no idea what to prioritize.</p>
+                  </div>
+                  <div className="ai-panel stack" style={{ margin: 0 }}>
+                    <span className="eyebrow ai" style={{ marginBottom: 8, width: "fit-content" }}>After</span>
+                    <strong className="strong" style={{ fontSize: "16px" }}>Clear AI direction.</strong>
+                    <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
+                      "Your physics accuracy rose, but you spend 34s too long on electrostatics. Review these 18 mistakes before your next mock."
                     </p>
-                  </Card>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* 5. Dual Audiences */}
+        <section className="section lg">
+          <div className="container grid two">
+            <Card hover className="pad">
+              <div className="stack" style={{ gap: 16 }}>
+                <span className="eyebrow" style={{ width: "fit-content" }}>For Students</span>
+                <h2 className="h2">Take control of your preparation.</h2>
+                <p className="lead">Prepare smarter, not harder. Find the perfect premium mock tests for your exam and track your true readiness.</p>
+                <div style={{ marginTop: 12 }}>
+                  <ButtonLink href="/marketplace">Browse Tests <ChevronRight size={16} /></ButtonLink>
+                </div>
+              </div>
+            </Card>
+            <Card hover className="pad">
+              <div className="stack" style={{ gap: 16 }}>
+                <span className="eyebrow ai" style={{ width: "fit-content" }}>For Institutes & Creators</span>
+                <h2 className="h2">Monetize your expertise.</h2>
+                <p className="lead">Scale your coaching. Host adaptive tests, deeply analyze student data, and build a scalable revenue stream.</p>
+                <div style={{ marginTop: 12 }}>
+                  <ButtonLink href="/creator" variant="secondary">Become a Creator <ChevronRight size={16} /></ButtonLink>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* 6. Marketplace Teaser */}
         <MarketplacePreview />
-        <PricingPreview />
+
+        {/* 7. The Final Anchor */}
+        <section className="section lg" style={{ textAlign: "center" }}>
+          <div className="container stack" style={{ alignItems: "center", gap: 32 }}>
+            <h2 className="h1" style={{ maxWidth: 800 }}>Ready to stop guessing and start improving?</h2>
+            <ButtonLink href="/auth/signup">
+              Create Free Account <ChevronRight size={18} />
+            </ButtonLink>
+          </div>
+        </section>
       </main>
     </PublicShell>
   );

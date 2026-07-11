@@ -1,26 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Link from "next/link";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import { GlassCard } from "@/app/_components/ui/GlassCard";
 import { Logo } from "@/app/_components/ui/Logo";
 import { GradientButton } from "@/app/_components/ui/GradientButton";
 
-export default function AuthPage({ params }: { params: { mode: string } }) {
+export default function AuthPage({ params }: { params: Promise<{ mode: string }> }) {
+  const { mode } = use(params);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [role, setRole] = useState("Student");
 
-  const isSignup = params.mode === "signup";
+  const isSignup = mode === "signup";
   const title =
-    params.mode === "login"
+    mode === "login"
       ? "Welcome back"
       : isSignup
         ? "Create your account"
-        : params.mode === "verify"
+        : mode === "verify"
           ? "Verify your account"
-          : params.mode === "forgot-password"
+          : mode === "forgot-password"
             ? "Recover your account"
             : "Reset your password";
 
@@ -70,7 +71,7 @@ export default function AuthPage({ params }: { params: { mode: string } }) {
 
           <input className="input" placeholder="Email address" />
 
-          {params.mode !== "forgot-password" && params.mode !== "verify" ? (
+          {mode !== "forgot-password" && mode !== "verify" ? (
             <div className="relative">
               <input
                 className="input pr-12"
@@ -106,7 +107,7 @@ export default function AuthPage({ params }: { params: { mode: string } }) {
             </div>
           )}
 
-          {params.mode === "verify" ? (
+          {mode === "verify" ? (
             <input className="input" placeholder="6 digit verification code" />
           ) : null}
 
