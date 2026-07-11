@@ -8,6 +8,7 @@ export function GradientButton({
   variant = "primary",
   size = "default",
   icon: Icon,
+  className = "",
   onClick,
 }: {
   href?: string;
@@ -15,9 +16,10 @@ export function GradientButton({
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: LucideIcon;
+  className?: string;
   onClick?: () => void;
 }) {
-  const cls = `btn ${variant} ${size === "compact" ? "compact" : ""}`;
+  const cls = `btn ${variant} ${size === "compact" ? "compact" : ""} ${className}`.trim();
   const inner = (
     <>
       {Icon ? <Icon size={16} strokeWidth={2.2} /> : null}
@@ -35,15 +37,17 @@ export function ButtonLink({
   onClick,
   variant = "primary",
   compact = false,
+  className = "",
 }: {
   href: string;
   children: React.ReactNode;
   onClick?: () => void;
   variant?: ButtonVariant;
   compact?: boolean;
+  className?: string;
 }) {
   return (
-    <Link className={`btn ${variant} ${compact ? "compact" : ""}`} href={href} onClick={onClick}>
+    <Link className={`btn ${variant} ${compact ? "compact" : ""} ${className}`.trim()} href={href} onClick={onClick}>
       {children}
     </Link>
   );

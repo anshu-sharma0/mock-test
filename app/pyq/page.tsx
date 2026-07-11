@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ChevronRight, Search, Filter, BookOpen, Clock, BarChart, Download, CheckCircle, Sparkles, Star } from "lucide-react";
 import { ButtonLink } from "../_components/ui/GradientButton";
 import { SectionHead } from "../_components/ui/SectionHead";
+import { GlassCard } from "../_components/ui/GlassCard";
+import { IconWrap } from "../_components/ui/IconWrap";
 import { PublicShell } from "../_components/layout/PublicShell";
 
 // Mock Data for PYQs
@@ -98,7 +100,7 @@ export default function PYQPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
               {featuredPYQs.map((paper) => (
-                <div key={paper.id} className="card pad hover flex flex-col gap-5 bg-white dark:bg-[var(--surface)]">
+                <GlassCard key={paper.id} hoverable className="flex flex-col gap-5 bg-white dark:bg-[var(--surface)]">
                   <div>
                     <div className="flex items-start justify-between mb-3">
                       <span className="inline-block px-3 py-1 rounded-full bg-[var(--primary-light)] text-[var(--primary)] text-xs font-extrabold uppercase tracking-wide">
@@ -119,14 +121,14 @@ export default function PYQPage() {
                   </div>
 
                   <div className="mt-auto pt-4 border-t border-[var(--border)] flex items-center justify-between gap-3">
-                    <Link href={`/tests/${paper.id}`} className="btn compact primary flex-1 text-center shadow-md">
+                    <ButtonLink href={`/tests/${paper.id}`} compact className="flex-1 text-center shadow-md">
                       Start Attempt
-                    </Link>
+                    </ButtonLink>
                     <button className="h-[40px] w-[40px] shrink-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-[var(--secondary-soft)] hover:text-[var(--primary)] hover:border-[var(--primary)] transition-all shadow-sm">
                       <Download size={18} />
                     </button>
                   </div>
-                </div>
+                </GlassCard>
               ))}
             </div>
 
@@ -142,27 +144,21 @@ export default function PYQPage() {
         <section className="section">
           <div className="container">
             <div className="grid md:grid-cols-3 gap-[32px]">
-              <div className="card pad stack items-start">
-                <div className="feature-icon success">
-                  <CheckCircle size={24} />
-                </div>
+              <GlassCard className="stack items-start">
+                <IconWrap icon={CheckCircle} tone="success" size="large" />
                 <h3 className="h3">Exact Exam Interface</h3>
                 <p className="muted">Practice on a UI that simulates the real exam environment. Eliminate exam anxiety and improve time management.</p>
-              </div>
-              <div className="card pad stack items-start">
-                <div className="feature-icon ai">
-                  <Sparkles size={24} />
-                </div>
+              </GlassCard>
+              <GlassCard className="stack items-start">
+                <IconWrap icon={Sparkles} tone="ai" size="large" />
                 <h3 className="h3">AI Performance Analysis</h3>
                 <p className="muted">Get a detailed breakdown of your weak areas, time spent per question, and topic-wise accuracy instantly.</p>
-              </div>
-              <div className="card pad stack items-start">
-                <div className="feature-icon">
-                  <Star size={24} />
-                </div>
+              </GlassCard>
+              <GlassCard className="stack items-start">
+                <IconWrap icon={Star} tone="primary" size="large" />
                 <h3 className="h3">Expert Solutions</h3>
                 <p className="muted">Don&apos;t just know the right answer. Understand the concepts behind it with step-by-step detailed explanations.</p>
-              </div>
+              </GlassCard>
             </div>
           </div>
         </section>
@@ -176,9 +172,9 @@ export default function PYQPage() {
                 Join thousands of students who have boosted their scores by practicing previous year papers.
               </p>
               <div className="mt-6 flex justify-center">
-                <Link href="/auth/signup" className="btn bg-white text-[var(--primary)] hover:bg-gray-50 border-none shadow-xl">
+                <ButtonLink href="/auth/signup" className="bg-white text-[var(--primary)] hover:bg-gray-50 border-none shadow-xl">
                   Get Started for Free
-                </Link>
+                </ButtonLink>
               </div>
             </div>
           </div>

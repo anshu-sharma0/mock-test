@@ -360,6 +360,7 @@ a {
 .btn {
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
   justify-content: center;
   gap: 8px;
   min-height: 48px;
@@ -374,9 +375,9 @@ a {
     border-color 220ms ease, color 220ms ease;
 }
 
-.btn:hover {
+/* .btn:hover {
   transform: translateY(-2px);
-}
+} */
 
 .btn:focus-visible,
 .input:focus-visible,
@@ -396,7 +397,7 @@ a {
 .btn.primary:hover {
   filter: brightness(1.1);
   box-shadow: 0 8px 24px -4px rgba(59, 130, 246, 0.45);
-  transform: scale(1.02) translateY(-1px);
+  /* transform: scale(1.02) translateY(-1px); */
 }
 
 .btn.ai {
