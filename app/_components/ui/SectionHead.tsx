@@ -1,11 +1,13 @@
 export function SectionHead({
   eyebrow,
   title,
+  description,
   copy,
   action,
   ai = false,
 }: {
   eyebrow?: string;
+  description?: string;
   title: string;
   copy?: string;
   action?: React.ReactNode;
@@ -19,6 +21,7 @@ export function SectionHead({
           {title}
         </h2>
         {copy ? <p className="lead">{copy}</p> : null}
+        {description ? <p className="lead">{description}</p> : null}
       </div>
       {action}
     </div>

@@ -26,7 +26,7 @@ import {
 import type { NavItem } from "./types";
 
 export const publicNav = [
-  { label: "Product", href: "/" },
+  { label: "PYQs", href: "/pyq" },
   { label: "Marketplace", href: "/marketplace" },
   // { label: "Creators", href: "/creators" },
   // { label: "Institutes", href: "/institutes" },
@@ -38,6 +38,7 @@ export const studentNav: NavItem[] = [
   { label: "Dashboard", href: "/app", icon: LayoutDashboard },
   { label: "Tests", href: "/app/tests", icon: ClipboardCheck },
   { label: "Practice", href: "/app/practice", icon: BookOpen },
+  { label: "PYQs", href: "/pyq", icon: FileText },
   { label: "Analytics", href: "/app/analytics", icon: BarChart3 },
   { label: "Planner", href: "/app/planner", icon: CalendarDays },
   { label: "Marketplace", href: "/app/marketplace", icon: Store },
