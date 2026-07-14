@@ -3,7 +3,8 @@ import { PublicShell } from "@/app/_components/layout/PublicShell";
 import { Card } from "@/app/_components/ui/GlassCard";
 import { GradientButton as ButtonLink } from "@/app/_components/ui/GradientButton";
 
-export default function OnboardingPage({ params }: { params: { role: string } }) {
+export default async function OnboardingPage({ params }: { params: Promise<{ role: string }> }) {
+  const { role } = await params;
   const cards = [
     ["Exam goal", "JEE Main 2026"],
     ["Target date", "12 weeks"],
@@ -17,13 +18,13 @@ export default function OnboardingPage({ params }: { params: { role: string } })
         <div className="grid two">
           <div className="stack">
             <span className="eyebrow ai">Onboarding</span>
-            <h1 className="h1">Personalize the {params.role} journey before the first dashboard.</h1>
+            <h1 className="h1">Personalize the {role} journey before the first dashboard.</h1>
             <p className="lead">
               The onboarding flow captures enough context to make the first recommendation
               useful without turning signup into a long form.
             </p>
             <div className="hero-actions">
-              <ButtonLink href={params.role === "student" ? "/app" : params.role === "institute" ? "/org" : "/creator"}>
+              <ButtonLink href={role === "student" ? "/app" : "/creator"}>
                 Enter workspace <ChevronRight size={18} />
               </ButtonLink>
               <ButtonLink href="/onboarding/student" variant="secondary">

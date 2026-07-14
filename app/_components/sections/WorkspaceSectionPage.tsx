@@ -1,20 +1,19 @@
 import { AppFrame } from "../layout/AppFrame";
 import { GenericWorkspace } from "./GenericWorkspace";
-import { creatorNav, orgNav, adminNav } from "../../_lib/navigation";
+import { creatorNav, adminNav } from "../../_lib/navigation";
 
 export function WorkspaceSectionPage({
   root,
   section,
 }: {
-  root: "creator" | "org" | "admin";
+  root: "creator" | "admin";
   section: string;
 }) {
-  const nav = root === "creator" ? creatorNav : root === "org" ? orgNav : adminNav;
+  const nav = root === "creator" ? creatorNav : adminNav;
   const active = `/${root}/${section}`;
   const item = nav.find((entry) => entry.href === active) ?? nav[0];
   const copy = {
     creator: "Creator workflows include test management, question bank, publishing, reviews, revenue, and payout operations.",
-    org: "Institute workflows include users, roles, batches, assignments, live tests, reports, billing, integrations, and audit logs.",
     admin: "Platform workflows include support, moderation, payments, content governance, feature rollout, and operational health.",
   }[root];
 
@@ -25,7 +24,7 @@ export function WorkspaceSectionPage({
         title={item.label}
         copy={copy}
         actions={[
-          [root === "creator" ? "Create test" : root === "org" ? "Create assignment" : "Open queue", `/${root}`],
+          [root === "creator" ? "Create test" : "Open queue", `/${root}`],
           ["View analytics", `/${root}/analytics`],
         ]}
       />

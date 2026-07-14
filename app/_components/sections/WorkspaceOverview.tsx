@@ -12,14 +12,13 @@ export function WorkspaceOverview({
   active,
   metrics,
 }: {
-  type: "creator" | "org" | "admin";
+  type: "creator" | "admin";
   nav: NavItem[];
   active: string;
   metrics: Metric[];
 }) {
   const labels = {
     creator: ["Creator dashboard", "Revenue, tests, students, reviews, and publishing workflow"],
-    org: ["Organization dashboard", "Branches, batches, assignments, live monitoring, and reports"],
     admin: ["Platform admin", "Queues, moderation, payments, support, and system health"],
   }[type];
 
@@ -29,7 +28,7 @@ export function WorkspaceOverview({
       subtitle={labels[1]}
       nav={nav}
       active={active}
-      cta={<ButtonLink href={type === "creator" ? "/creator/tests/new" : type === "org" ? "/org/assignments" : "/admin/support"} compact><Plus size={16} /> New action</ButtonLink>}
+      cta={<ButtonLink href={type === "creator" ? "/creator/tests/new" : "/admin/support"} compact><Plus size={16} /> New action</ButtonLink>}
     >
       <div className="workspace">
         <div className="grid four">
@@ -49,9 +48,7 @@ export function WorkspaceOverview({
               <p>
                 {type === "creator"
                   ? "Update three high-traffic tests and reply to recent reviews to improve conversion."
-                  : type === "org"
-                    ? "Batch 12 needs reminders before the Sunday full mock."
-                    : "Moderation and payment queues are within SLA, but two webhook retries need review."}
+                  : "Moderation and payment queues are within SLA, but two webhook retries need review."}
               </p>
             </div>
           </Card>

@@ -9,7 +9,6 @@ import {
   CreditCard,
   DollarSign,
   FileText,
-  GraduationCap,
   HelpCircle,
   LayoutDashboard,
   ListChecks,
@@ -18,7 +17,6 @@ import {
   ShieldCheck,
   Store,
   Trophy,
-  UserCog,
   Users,
   Wallet,
   Zap,
@@ -60,20 +58,6 @@ export const creatorNav: NavItem[] = [
   { label: "Payouts", href: "/creator/payouts", icon: Wallet },
   { label: "Reviews", href: "/creator/reviews", icon: MessageSquare },
   { label: "Settings", href: "/creator/settings", icon: Settings },
-];
-
-export const orgNav: NavItem[] = [
-  { label: "Overview", href: "/org", icon: LayoutDashboard },
-  { label: "Branches", href: "/org/branches", icon: Building2 },
-  { label: "Users", href: "/org/users", icon: Users },
-  { label: "Roles", href: "/org/roles", icon: UserCog },
-  { label: "Batches", href: "/org/batches", icon: GraduationCap },
-  { label: "Tests", href: "/org/tests", icon: ClipboardCheck },
-  { label: "Assignments", href: "/org/assignments", icon: ListChecks },
-  { label: "Live", href: "/org/live", icon: Activity },
-  { label: "Reports", href: "/org/reports", icon: FileText },
-  { label: "Billing", href: "/org/billing", icon: CreditCard },
-  { label: "Settings", href: "/org/settings", icon: Settings },
 ];
 
 export const adminNav: NavItem[] = [
