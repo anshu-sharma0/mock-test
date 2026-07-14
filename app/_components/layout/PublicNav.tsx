@@ -18,7 +18,7 @@ export function PublicNav() {
         <Logo />
 
         {/* Center: Desktop Navigation */}
-        <nav className="nav-links hidden md:flex" aria-label="Main navigation">
+        <nav className="nav-links hidden! lg:flex!" aria-label="Main navigation">
           {publicNav.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}

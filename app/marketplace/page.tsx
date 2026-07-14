@@ -1,4 +1,7 @@
-import { Search, ChevronRight, SlidersHorizontal, BookOpen, Star, Building2, UserCircle } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { Search, ChevronRight, SlidersHorizontal, BookOpen, Star, Building2, UserCircle, X } from "lucide-react";
 import { PublicShell } from "../_components/layout/PublicShell";
 import { GradientButton as ButtonLink } from "../_components/ui/GradientButton";
 import { ListingCard } from "../_components/ui/ListingCard";
@@ -6,6 +9,8 @@ import { SectionHead } from "../_components/ui/SectionHead";
 import { marketplaceListings } from "../_lib/data";
 
 export default function MarketplacePage() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const categories = [
     { name: "Engineering (JEE)", count: 124 },
     { name: "Medical (NEET)", count: 89 },
@@ -93,53 +98,86 @@ export default function MarketplacePage() {
 
         <section className="section lg pt-0!">
           <div className="container">
-            <div className="row between" style={{ marginBottom: 24, paddingBottom: 16, borderBottom: "1px solid var(--border)" }}>
+            <div className="row between wrap" style={{ marginBottom: 24, paddingBottom: 16, borderBottom: "1px solid var(--border)", gap: 16 }}>
               <h2 className="h2" style={{ fontSize: "28px" }}>All Mock Tests</h2>
-              <div className="row" style={{ gap: 12 }}>
-                <span className="muted text-nowrap" style={{ fontSize: "14px" }}>Sort by:</span>
-                <select className="select" style={{ background: "transparent", border: "none", color: "var(--heading)", fontWeight: "bold", outline: "none", cursor: "pointer" }}>
-                  <option>Most Popular</option>
-                  <option>Highest Rated</option>
-                  <option>Newest</option>
-                  <option>Price: Low to High</option>
-                </select>
+              <div className="row wrap" style={{ gap: 24 }}>
+                {/* Filter Dropdown */}
+                <div style={{ position: "relative" }}>
+                  <button 
+                    className="btn secondary compact row" 
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  >
+                    <SlidersHorizontal size={16} /> Filters
+                  </button>
+
+                  {isFilterOpen && (
+                    <div 
+                      className="card pad stack" 
+                      style={{ 
+                        position: "absolute", 
+                        left: 0, 
+                        top: "calc(100% + 8px)", 
+                        zIndex: 40, 
+                        minWidth: "240px",
+                        maxWidth: "calc(100vw - 32px)",
+                        background: "var(--bg)",
+                        boxShadow: "var(--shadow-lg)",
+                        border: "1px solid var(--border)",
+                        gap: 24
+                      }}
+                    >
+                      <div className="row between">
+                        <strong className="strong">Filters</strong>
+                        <button 
+                          className="btn ghost compact"
+                          style={{ padding: "4px" }}
+                          onClick={() => setIsFilterOpen(false)}
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+
+                      <div className="stack" style={{ gap: 12 }}>
+                        <strong className="strong" style={{ fontSize: "14px" }}>Price</strong>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Free</label>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Premium</label>
+                      </div>
+
+                      <div className="stack" style={{ gap: 12 }}>
+                        <strong className="strong" style={{ fontSize: "14px" }}>Difficulty</strong>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Easy</label>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Medium</label>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Hard</label>
+                      </div>
+
+                      <div className="stack" style={{ gap: 12 }}>
+                        <strong className="strong" style={{ fontSize: "14px" }}>Format</strong>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Full-length</label>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Chapter-wise</label>
+                        <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Previous Year</label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Sort by */}
+                <div className="row" style={{ gap: 12 }}>
+                  <span className="muted text-nowrap" style={{ fontSize: "14px" }}>Sort by:</span>
+                  <select className="select" style={{ background: "transparent", border: "none", color: "var(--heading)", fontWeight: "bold", outline: "none", cursor: "pointer", padding: 0, minHeight: "auto" }}>
+                    <option>Most Popular</option>
+                    <option>Highest Rated</option>
+                    <option>Newest</option>
+                    <option>Price: Low to High</option>
+                  </select>
+                </div>
               </div>
             </div>
 
-            <div className="grid sidebar">
-              {/* Sidebar Filters */}
-              <div className="stack" style={{ gap: 32 }}>
-                <div className="stack" style={{ gap: 12 }}>
-                  <strong className="strong row" style={{ gap: 8 }}><SlidersHorizontal size={16} /> Filters</strong>
-                </div>
-
-                <div className="stack" style={{ gap: 12 }}>
-                  <strong className="strong" style={{ fontSize: "14px" }}>Price</strong>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Free</label>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Premium</label>
-                </div>
-
-                <div className="stack" style={{ gap: 12 }}>
-                  <strong className="strong" style={{ fontSize: "14px" }}>Difficulty</strong>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Easy</label>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Medium</label>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Hard</label>
-                </div>
-
-                <div className="stack" style={{ gap: 12 }}>
-                  <strong className="strong" style={{ fontSize: "14px" }}>Format</strong>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" defaultChecked /> Full-length</label>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Chapter-wise</label>
-                  <label className="row" style={{ gap: 8, cursor: "pointer" }}><input type="checkbox" /> Previous Year</label>
-                </div>
-              </div>
-
-              {/* Main Grid */}
-              <div className="grid two">
-                {marketplaceListings.map((listing) => (
-                  <ListingCard key={listing.slug} listing={listing} />
-                ))}
-              </div>
+            {/* Main Grid */}
+            <div className="grid three">
+              {marketplaceListings.map((listing) => (
+                <ListingCard key={listing.slug} listing={listing} />
+              ))}
             </div>
           </div>
         </section>

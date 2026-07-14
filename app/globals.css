@@ -114,11 +114,13 @@
 html {
   min-height: 100%;
   scroll-padding-top: 96px;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100%;
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--body);
   font-family: var(--font-body);
@@ -293,7 +295,7 @@ a {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.grid.sidebar {
+.grid.has-sidebar {
   grid-template-columns: 240px minmax(0, 1fr);
   gap: 40px;
 }
@@ -1142,7 +1144,7 @@ a {
   .grid.three,
   .grid.four,
   .grid.five,
-  .grid.sidebar,
+  .grid.has-sidebar,
   .grid.checkout {
     grid-template-columns: 1fr;
   }
