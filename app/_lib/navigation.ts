@@ -28,6 +28,7 @@ import type { NavItem } from "./types";
 export const publicNav = [
   { label: "PYQs", href: "/pyq" },
   { label: "Marketplace", href: "/marketplace" },
+  { label: "Contact", href: "/contact" },
   // { label: "Creators", href: "/creators" },
   // { label: "Institutes", href: "/institutes" },
   // { label: "Resources", href: "/resources" },

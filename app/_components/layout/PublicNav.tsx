@@ -12,13 +12,13 @@ export function PublicNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="public-nav">
-      <div className="container public-nav-inner">
+    <header className="sticky top-0 z-30 border-b border-border bg-surface backdrop-blur-md">
+      <div className="container grid grid-cols-[1fr_auto_1fr] items-center min-h-[76px] max-md:flex max-md:flex-wrap max-md:min-h-[68px] max-md:py-3 max-md:gap-4 max-md:justify-between">
         {/* Left: Logo */}
         <Logo />
 
         {/* Center: Desktop Navigation */}
-        <nav className="nav-links hidden! lg:flex!" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-6 text-secondary-soft text-sm font-bold" aria-label="Main navigation">
           {publicNav.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
@@ -27,7 +27,7 @@ export function PublicNav() {
         </nav>
 
         {/* Right: Actions & Mobile Toggle */}
-        <div className="row nav-actions">
+        <div className="flex items-center justify-end gap-3">
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-[12px]">
             <ThemeToggle />
@@ -56,8 +56,7 @@ export function PublicNav() {
       {/* Mobile Navigation Dropdown */}
       {isMobileMenuOpen && (
         <div
-          className="md:hidden border-b border-(--border) shadow-lg absolute left-0 right-0 top-[68px] z-50 p-4"
-          style={{ background: 'var(--bg)' }}
+          className="md:hidden border-b border-(--border) shadow-lg absolute left-0 right-0 top-[68px] z-50 p-4 bg-[image:var(--bg)]"
         >
           <nav className="flex flex-col gap-4 text-[15px] font-bold text-(--secondary-soft) mb-4">
             {publicNav.map((item) => (

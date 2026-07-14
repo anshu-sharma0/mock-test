@@ -8,7 +8,6 @@ import { GradientButton as ButtonLink } from "./_components/ui/GradientButton";
 import { IconWrap } from "./_components/ui/IconWrap";
 import { SectionHead } from "./_components/ui/SectionHead";
 import { MarketplacePreview } from "./_components/sections/MarketplacePreview";
-import { PricingPreview } from "./_components/sections/PricingPreview";
 
 function HeroPreview() {
   return (
@@ -72,10 +71,10 @@ function HeroPreview() {
 export default function LandingPage() {
   return (
     <PublicShell>
-      <main>
+      <main className="overflow-x-clip">
         {/* 1. The Hero Section */}
-        <section className="container hero section hero">
-          <div className="stack" style={{ gap: 24 }}>
+        <section className="container grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] gap-12 items-center py-12 md:py-16 lg:py-[72px]">
+          <div className="flex flex-col gap-6">
             <span className="eyebrow ai">
               <Sparkles size={16} /> Precision Mock Tests
             </span>
@@ -83,7 +82,7 @@ export default function LandingPage() {
             <p className="lead">
               Go beyond simple scores. MockTestZone uses AI to analyze your weak chapters, speed, and accuracy to tell you exactly what to study next.
             </p>
-            <div className="hero-actions" style={{ marginTop: 12 }}>
+            <div className="flex flex-wrap gap-3 mt-3">
               <ButtonLink href="/auth/signup">
                 Start Free Practice <ChevronRight size={18} />
               </ButtonLink>
@@ -124,7 +123,7 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mt-12">
               <GlassCard hoverable padding="large" className="relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[40px] group-hover:bg-blue-500/20 transition-colors pointer-events-none" />
-                <div className="stack gap-4 relative z-10">
+                <div className="flex flex-col gap-4 relative z-10">
                   <span className="font-utility text-5xl font-black text-blue-500/20 group-hover:text-blue-500 transition-colors">01</span>
                   <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Attempt</h3>
                   <p className="text-[var(--body)] leading-relaxed m-0">Take adaptive tests or timed practice drills that perfectly simulate real exam pressure and environment.</p>
@@ -133,7 +132,7 @@ export default function LandingPage() {
 
               <GlassCard hoverable padding="large" className="relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 rounded-full blur-[40px] group-hover:bg-violet-500/20 transition-colors pointer-events-none" />
-                <div className="stack gap-4 relative z-10">
+                <div className="flex flex-col gap-4 relative z-10">
                   <span className="font-utility text-5xl font-black text-violet-500/20 group-hover:text-violet-500 transition-colors">02</span>
                   <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Review</h3>
                   <p className="text-[var(--body)] leading-relaxed m-0">AI analyzes your speed, accuracy, and identifies weak chapters instantly, turning data into clear insights.</p>
@@ -142,7 +141,7 @@ export default function LandingPage() {
 
               <GlassCard hoverable padding="large" className="relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-[40px] group-hover:bg-emerald-500/20 transition-colors pointer-events-none" />
-                <div className="stack gap-4 relative z-10">
+                <div className="flex flex-col gap-4 relative z-10">
                   <span className="font-utility text-5xl font-black text-emerald-500/20 group-hover:text-emerald-500 transition-colors">03</span>
                   <h3 className="text-2xl font-bold text-[var(--heading)] m-0">Plan</h3>
                   <p className="text-[var(--body)] leading-relaxed m-0">A daily study planner is automatically generated based on the specific gaps and mistakes in your results.</p>
@@ -155,30 +154,30 @@ export default function LandingPage() {
         {/* 4. The Signature AI Layer */}
         <section className="section">
           <div className="container">
-            <div className="card pad" style={{ background: "var(--surface)", borderColor: "var(--ai)", borderWidth: "1px", borderStyle: "solid" }}>
-              <div className="grid two" style={{ alignItems: "center" }}>
-                <div className="stack" style={{ gap: 16 }}>
+            <div className="rounded-[20px] p-6 backdrop-blur-md shadow-md border border-ai bg-surface transition-all duration-240">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div className="flex flex-col gap-4">
                   <span className="eyebrow ai">Signature AI Layer</span>
                   <h2 className="h2">Insights that actually explain what to do next.</h2>
                   <p className="lead">
                     Charts are nice, but action is better. Our AI summarizes your mistakes, predicts your readiness, and gives you a concrete study plan without overwhelming you with noise.
                   </p>
-                  <div style={{ marginTop: 8 }}>
+                  <div className="mt-2">
                     <ButtonLink href="/app/analytics" variant="secondary">
                       View analytics flow <ArrowRight size={16} />
                     </ButtonLink>
                   </div>
                 </div>
-                <div className="grid" style={{ gap: 16 }}>
-                  <div className="mini-stat" style={{ opacity: 0.7 }}>
-                    <span className="eyebrow" style={{ marginBottom: 8 }}>Before</span>
-                    <strong className="strong" style={{ fontSize: "16px", fontFamily: "var(--font-body)" }}>Just a score and a confusing chart.</strong>
-                    <p style={{ margin: "4px 0 0", fontSize: "14px" }}>Score dropped from 76% to 69%. Student sees a chart but has no idea what to prioritize.</p>
+                <div className="grid gap-4">
+                  <div className="p-3.5 border border-border rounded-2xl bg-surface opacity-70">
+                    <span className="eyebrow mb-2">Before</span>
+                    <strong className="font-bold text-heading text-base font-body">Just a score and a confusing chart.</strong>
+                    <p className="mt-1 text-sm text-body">Score dropped from 76% to 69%. Student sees a chart but has no idea what to prioritize.</p>
                   </div>
-                  <div className="ai-panel stack" style={{ margin: 0 }}>
-                    <span className="eyebrow ai" style={{ marginBottom: 8, width: "fit-content" }}>After</span>
-                    <strong className="strong" style={{ fontSize: "16px" }}>Clear AI direction.</strong>
-                    <p style={{ margin: "4px 0 0", fontSize: "14px" }}>
+                  <div className="mt-4 p-4 border border-ai/20 rounded-2xl bg-ai-light/80 flex flex-col gap-4">
+                    <span className="eyebrow ai mb-2 w-fit">After</span>
+                    <strong className="font-bold text-heading text-base">Clear AI direction.</strong>
+                    <p className="mt-1 text-sm text-body">
                       "Your physics accuracy rose, but you spend 34s too long on electrostatics. Review these 18 mistakes before your next mock."
                     </p>
                   </div>
@@ -190,23 +189,23 @@ export default function LandingPage() {
 
         {/* 5. Dual Audiences */}
         <section className="section lg">
-          <div className="container grid two">
+          <div className="container grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card hover className="pad">
-              <div className="stack" style={{ gap: 16 }}>
-                <span className="eyebrow" style={{ width: "fit-content" }}>For Students</span>
+              <div className="flex flex-col gap-4">
+                <span className="eyebrow w-fit">For Students</span>
                 <h2 className="h2">Take control of your preparation.</h2>
                 <p className="lead">Prepare smarter, not harder. Find the perfect premium mock tests for your exam and track your true readiness.</p>
-                <div style={{ marginTop: 12 }}>
+                <div className="mt-3">
                   <ButtonLink href="/marketplace">Browse Tests <ChevronRight size={16} /></ButtonLink>
                 </div>
               </div>
             </Card>
             <Card hover className="pad">
-              <div className="stack" style={{ gap: 16 }}>
-                <span className="eyebrow ai" style={{ width: "fit-content" }}>For Institutes & Creators</span>
+              <div className="flex flex-col gap-4">
+                <span className="eyebrow ai w-fit">For Institutes & Creators</span>
                 <h2 className="h2">Monetize your expertise.</h2>
                 <p className="lead">Scale your coaching. Host adaptive tests, deeply analyze student data, and build a scalable revenue stream.</p>
-                <div style={{ marginTop: 12 }}>
+                <div className="mt-3">
                   <ButtonLink href="/creator" variant="secondary">Become a Creator <ChevronRight size={16} /></ButtonLink>
                 </div>
               </div>
@@ -219,8 +218,8 @@ export default function LandingPage() {
 
         {/* 7. The Final Anchor */}
         <section className="section lg" style={{ textAlign: "center" }}>
-          <div className="container stack" style={{ alignItems: "center", gap: 32 }}>
-            <h2 className="h1" style={{ maxWidth: 800 }}>Ready to stop guessing and start improving?</h2>
+          <div className="container flex flex-col items-center gap-8">
+            <h2 className="h1 max-w-[800px]">Ready to stop guessing and start improving?</h2>
             <ButtonLink href="/auth/signup">
               Create Free Account <ChevronRight size={18} />
             </ButtonLink>

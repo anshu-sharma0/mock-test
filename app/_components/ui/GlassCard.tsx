@@ -13,12 +13,15 @@ export function GlassCard({
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const padClass = padding === "none" ? "" : padding === "large" ? "" : "pad";
-  const padStyle = padding === "large" ? { padding: 32 } : undefined;
+  const padClass = padding === "none" ? "" : padding === "large" ? "p-8" : "p-6";
+  const hoverClass = hoverable
+    ? "hover:border-indigo-500/22 hover:shadow-lift hover:-translate-y-1"
+    : "";
+
   return (
     <div
-      className={`card ${padClass} ${hoverable ? "hover" : ""} ${className}`}
-      style={{ ...padStyle, ...style }}
+      className={`border border-border rounded-[20px] bg-surface backdrop-blur-md shadow-md transition-all duration-300 ${padClass} ${hoverClass} ${className}`.trim()}
+      style={style}
     >
       {children}
     </div>
