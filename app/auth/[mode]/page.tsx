@@ -40,7 +40,7 @@ export default function AuthPage({ params }: { params: Promise<{ mode: string }>
           </div>
         </div>
 
-        <AuthForm mode={mode} />
+        <AuthForm mode={mode} allowedRoles={["Student"]} />
       </GlassCard>
     </div>
   );

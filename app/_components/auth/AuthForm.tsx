@@ -4,14 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
-import { GradientButton } from "@/app/_components/ui/GradientButton";
 
-export function AuthForm({ mode }: { mode: string }) {
+interface AuthFormProps {
+  mode: string;
+  allowedRoles?: ("Student" | "Creator" | "Admin")[];
+}
+
+export function AuthForm({ mode, allowedRoles = ["Student"] }: AuthFormProps) {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [role, setRole] = useState("Student");
+  const [role, setRole] = useState(allowedRoles[0]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,21 +84,23 @@ export function AuthForm({ mode }: { mode: string }) {
 
       {isSignup && (
         <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap bg-[var(--surface-hover)] p-1.5 rounded-2xl border border-[var(--border)]">
-            {["Student", "Creator"].map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={() => setRole(r)}
-                className={`flex-1 py-2 px-3 border-none rounded-[10px] cursor-pointer transition-all duration-200 ${role === r
-                  ? "bg-white font-extrabold text-[var(--primary)] shadow-sm"
-                  : "bg-transparent font-semibold text-[var(--muted)] shadow-none"
-                  }`}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
+          {allowedRoles.length > 1 && (
+            <div className="flex flex-wrap bg-[var(--surface-hover)] p-1.5 rounded-2xl border border-[var(--border)]">
+              {allowedRoles.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRole(r)}
+                  className={`flex-1 py-2 px-3 border-none rounded-[10px] cursor-pointer transition-all duration-200 ${role === r
+                    ? "bg-white font-extrabold text-[var(--primary)] shadow-sm"
+                    : "bg-transparent font-semibold text-[var(--muted)] shadow-none"
+                    }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+          )}
           <input
             className="input"
             placeholder="Full Name"
