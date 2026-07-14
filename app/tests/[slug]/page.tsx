@@ -293,7 +293,7 @@ export default function ExamPage() {
       <div className="min-h-screen bg-gradient-to-br from-[var(--bg)] to-[var(--surface)] flex items-center justify-center p-6">
         <ExamInstructionsModal
           isOpen={!isStarted}
-          onClose={() => router.push('/pyq')}
+          onClose={() => router.push('/app/pyqs')}
           onStart={startExam}
           totalQuestions={mockQuestions.length}
           durationMins={Math.floor(3600 / 60)}

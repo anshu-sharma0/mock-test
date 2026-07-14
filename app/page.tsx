@@ -86,7 +86,7 @@ export default function LandingPage() {
               <ButtonLink href="/auth/signup">
                 Start Free Practice <ChevronRight size={18} />
               </ButtonLink>
-              <ButtonLink href="/marketplace" variant="secondary">
+              <ButtonLink href="/app/marketplace" variant="secondary">
                 Explore Marketplace
               </ButtonLink>
             </div>
@@ -196,7 +196,7 @@ export default function LandingPage() {
                 <h2 className="h2">Take control of your preparation.</h2>
                 <p className="lead">Prepare smarter, not harder. Find the perfect premium mock tests for your exam and track your true readiness.</p>
                 <div className="mt-3">
-                  <ButtonLink href="/marketplace">Browse Tests <ChevronRight size={16} /></ButtonLink>
+                  <ButtonLink href="/app/marketplace">Browse Tests <ChevronRight size={16} /></ButtonLink>
                 </div>
               </div>
             </Card>

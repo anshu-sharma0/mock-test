@@ -858,6 +858,7 @@ a {
 .status {
   display: inline-flex;
   align-items: center;
+  width: max-content;
   gap: 5px;
   min-height: 28px;
   padding: 3px 12px;

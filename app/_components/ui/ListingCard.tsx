@@ -13,7 +13,7 @@ const getGradient = (seed: number) => {
 
 export function ListingCard({ listing }: { listing: (typeof marketplaceListings)[number] }) {
   const gradient = getGradient(listing.title.length);
-  
+
   return (
     <GlassCard hoverable padding="none" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       {/* Header Mesh / Image area */}
@@ -25,7 +25,7 @@ export function ListingCard({ listing }: { listing: (typeof marketplaceListings)
           {listing.tests} TESTS
         </span>
       </div>
-      
+
       {/* Body Area */}
       <div className="stack" style={{ padding: "20px", flex: 1, gap: 12 }}>
         <div className="stack" style={{ gap: 4 }}>
@@ -35,11 +35,11 @@ export function ListingCard({ listing }: { listing: (typeof marketplaceListings)
             <CheckCircle size={14} color="var(--primary)" />
           </div>
         </div>
-        
+
         <p style={{ margin: 0, fontSize: "14px", opacity: 0.8, flex: 1, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           {listing.outcome}
         </p>
-        
+
         <div className="row between" style={{ marginTop: "auto", paddingTop: 16, borderTop: "1px solid var(--border)" }}>
           <div className="stack" style={{ gap: 2 }}>
             <strong className="strong" style={{ fontSize: "18px" }}>{listing.price}</strong>
@@ -48,7 +48,7 @@ export function ListingCard({ listing }: { listing: (typeof marketplaceListings)
               {listing.rating} (1.2k enrolled)
             </span>
           </div>
-          <ButtonLink href={`/marketplace/${listing.slug}`} variant="secondary" size="compact">
+          <ButtonLink href={`/app/marketplace/${listing.slug}`} variant="secondary" size="compact">
             View Details
           </ButtonLink>
         </div>

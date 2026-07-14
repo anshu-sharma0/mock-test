@@ -12,7 +12,7 @@ export function MarketplacePreview() {
           title="Premium creator tests with trust signals built in."
           copy="Students can browse by exam, difficulty, rating, creator, and outcome."
           action={
-            <ButtonLink href="/marketplace" variant="secondary">
+            <ButtonLink href="/app/marketplace" variant="secondary">
               Explore all
             </ButtonLink>
           }
